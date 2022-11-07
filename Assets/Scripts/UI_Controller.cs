@@ -1,18 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UI_Controller : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    void OpenActionPanel(bool isLgAction)
     {
-        
+
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnLgActionButton_Clicked()
     {
-        
+        OpenActionPanel(true);
     }
+
+    public void OnShrtActionButton_Clicked()
+    {
+        OpenActionPanel(false);
+    }
+
+    public void LoadSceneByName(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+    }
+
+    public void OnQuitButton_Clicked()
+    {
+        Application.Quit();
+    }
+
 }
