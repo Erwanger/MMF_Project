@@ -4,23 +4,36 @@ using UnityEngine;
 using PlayFab;
 using PlayFab.ClientModels;
 using Newtonsoft.Json;
-using UnityEngine.UI;
+
 
 public class PlayfabManager : MonoBehaviour
 {
     [Header("UI")]
-    public Text messageText;
-    public InputField emailInput;
-    public InputField passwordInput;
+    public Menu_UI_Controller uiController;
 
-
-
-    public void Register()
+    public void Register(string email, string password)
     {
-
+        var request = new RegisterPlayFabUserRequest
+        {
+            Email = email,
+            Password = password,
+            RequireBothUsernameAndEmail = false
+        };
+        PlayFabClientAPI.RegisterPlayFabUser(request, OnRegisterSuccess, OnError);
     }
 
-    public void Login()
+    void OnRegisterSuccess(RegisterPlayFabUserResult result)
+    {
+        uiController.DisplayMessage("Registered and logged in!");
+    }
+
+    void OnError(PlayFabError error)
+    {
+        uiController.DisplayMessage("Error!");
+        Debug.Log(error.GenerateErrorReport());
+    }
+
+    public void Login(string email, string password)
     {
 
     }
