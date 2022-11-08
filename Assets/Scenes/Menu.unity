@@ -1545,10 +1545,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 087d9d717e8f9464a81ff5bed341cdcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  emailInput_GO: {fileID: 1736033115}
+  passwordInput_GO: {fileID: 741579890}
+  messageText_GO: {fileID: 864039904}
   emailInput: {fileID: 1736033117}
   passwordInput: {fileID: 741579892}
   messageText: {fileID: 864039906}
-  playfabManager: {fileID: 0}
+  playfabManager: {fileID: 1937168942}
 --- !u!1 &1004215848
 GameObject:
   m_ObjectHideFlags: 0

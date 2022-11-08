@@ -7,12 +7,25 @@ using UnityEngine.SceneManagement;
 
 public class Menu_UI_Controller : MonoBehaviour
 {
+    [SerializeField] GameObject emailInput_GO;
+    [SerializeField] GameObject passwordInput_GO;
+    [SerializeField] GameObject messageText_GO;
+
+    [HideInInspector]
     public TMP_InputField emailInput;
+    [HideInInspector]
     public TMP_InputField passwordInput;
+    [HideInInspector]
     public TextMeshProUGUI messageText;
 
     public PlayfabManager playfabManager;
 
+    private void Start()
+    {
+        emailInput = emailInput_GO.GetComponent<TMP_InputField>();
+        passwordInput = passwordInput_GO.GetComponent<TMP_InputField>();
+        messageText = messageText_GO.GetComponent<TextMeshProUGUI>();
+    }
 
     public void OnClick_Login()
     {
