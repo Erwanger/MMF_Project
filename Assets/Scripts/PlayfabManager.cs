@@ -25,6 +25,7 @@ public class PlayfabManager : MonoBehaviour
     void OnRegisterSuccess(RegisterPlayFabUserResult result)
     {
         uiController.DisplayMessage("Registered and logged in!");
+        uiController.LoggedIn();
     }
 
     void OnError(PlayFabError error)
@@ -33,9 +34,20 @@ public class PlayfabManager : MonoBehaviour
         Debug.Log(error.GenerateErrorReport());
     }
 
+    void OnLoginSuccess(LoginResult result)
+    {
+        uiController.DisplayMessage("Logged in!");
+        uiController.LoggedIn();
+    }
+
     public void Login(string email, string password)
     {
-
+        var request = new LoginWithEmailAddressRequest
+        {
+            Email = email,
+            Password = password
+        };
+        PlayFabClientAPI.LoginWithEmailAddress(request, OnLoginSuccess, OnError);
     }
 
     public void ResetPassword()

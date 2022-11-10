@@ -209,7 +209,7 @@ GameObject:
   m_Component:
   - component: {fileID: 29526574}
   m_Layer: 5
-  m_Name: PanelLocation (1)
+  m_Name: PanelLocationLogin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -235,7 +235,7 @@ RectTransform:
   - {fileID: 741579891}
   - {fileID: 864039905}
   m_Father: {fileID: 924180250}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -621,20 +621,20 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 251590208}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2026223146}
-  m_Father: {fileID: 419196019}
-  m_RootOrder: 3
+  m_Father: {fileID: 924180250}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -150}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 26, y: -26}
   m_SizeDelta: {x: 160, y: 30}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0, y: 1}
 --- !u!114 &251590210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -942,7 +942,7 @@ GameObject:
   m_Component:
   - component: {fileID: 419196019}
   m_Layer: 5
-  m_Name: PanelLocation
+  m_Name: PanelLocationScenes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -963,9 +963,8 @@ RectTransform:
   - {fileID: 2745566}
   - {fileID: 632690491}
   - {fileID: 153239024}
-  - {fileID: 251590209}
   m_Father: {fileID: 924180250}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1511,6 +1510,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 251590209}
   - {fileID: 419196019}
   - {fileID: 29526574}
   m_Father: {fileID: 0}
@@ -1548,6 +1548,8 @@ MonoBehaviour:
   emailInput_GO: {fileID: 1736033115}
   passwordInput_GO: {fileID: 741579890}
   messageText_GO: {fileID: 864039904}
+  panelLogin_GO: {fileID: 29526573}
+  panelMenu_GO: {fileID: 419196018}
   emailInput: {fileID: 1736033117}
   passwordInput: {fileID: 741579892}
   messageText: {fileID: 864039906}
