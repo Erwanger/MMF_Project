@@ -8,6 +8,8 @@ using Newtonsoft.Json;
 
 public class PlayfabManager : MonoBehaviour
 {
+    public static PlayfabManager singletonPlayFab;
+
     [Header("UI")]
     public Menu_UI_Controller uiController;
 
@@ -54,4 +56,22 @@ public class PlayfabManager : MonoBehaviour
     {
 
     }
+
+    private void Start()
+    {
+        if(singletonPlayFab == null)
+        {
+            singletonPlayFab = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
+        DontDestroyOnLoad(gameObject);
+    }
+
+
+
+
 }
