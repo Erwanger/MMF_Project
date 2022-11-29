@@ -24,7 +24,7 @@ Tags : Liste des Tags récupérés par chaque partie du mech*/
 
 }
 
-
+[System.Serializable]
 public class Part
 {
 /*Int Id
@@ -35,17 +35,44 @@ Description
 Stats
 Coût en ressources(en faisant correspondre l’Int avec l’Id de ressource)*/
 
-    private ComponentType type;
-    private int id, energyCost;
-    private int[] stats;
-    private List<Resource> resourceCost;
-    private string name, description;
-    
+    public ComponentType type;
+    public int id, energyCost;
+    public int[] stats;
+    public List<Resource> resourceCost;
+    public string name, description;
 
-    struct Resource
+    [System.Serializable]
+    public struct Resource
     {
-        int resourceId;
-        int qty;
+        public int resourceId;
+        public int qty;
+
+        public Resource(int _res, int _qty)
+        {
+            resourceId = _res;
+            qty = _qty;
+        }
+    }
+
+    public Part(ComponentType _t, int _id, int _energy, int[] _stats, List<Resource> _resources, string _name, string _desc)
+    {
+        type = _t;
+        id = _id;
+        energyCost = _energy;
+        stats = new int[4];
+        resourceCost = new List<Resource>();
+        for(int i=0; i<4; i++)
+        {
+            stats[i] = _stats[i];
+        }
+        foreach (Resource res in _resources)
+        {
+            resourceCost.Add(res);
+            
+        }
+        _resources.Clear();
+        name = _name;
+        description = _desc;
     }
 }
 
@@ -69,10 +96,9 @@ public enum Tags
 
 public enum ComponentType
 {
-
-
-
-
-
-
+    Frame,
+    Weapon,
+    Arm,
+    Leg,
+    Reactor
 }
