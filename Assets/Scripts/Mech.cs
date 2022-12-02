@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+[System.Serializable]
 public class Mech
 {
 /*Pv : Quantité de dégâts pouvant être encaissés
@@ -15,13 +15,32 @@ Puissance réacteur : Nombre de pts de structure max du mech
 Tags : Liste des Tags récupérés par chaque partie du mech*/
 
 
-    private int hp, defense, agility, speed, atkPower, mechPower;
-    private List<Tags> mechTags;
-    private List<Tags> mechComponents;     
+    public int hp, defense, agility, speed, atkPower, mechPower;
+    public List<Tags> mechTags;
+    public List<Part> mechComponents;
+    public string name;
+    public string description;
 
+    public Mech(string _name, string _description, int _hp, int _def, int _agi, int _spd, int _atkPow, int _mechPow, List<Tags> _mTags, List<Part> _mComp)
+    {
+        name = _name;
+        description = _description;
+        hp = _hp;
+        defense = _def;
+        agility = _agi;
+        speed = _spd;
+        atkPower = 0;
+        mechPower = 0;
 
-
-
+        mechTags = new List<Tags>();
+        
+        mechComponents = new List<Part>();
+        foreach (Part t in _mComp)
+        {
+            mechComponents.Add(t);
+        }
+        _mComp.Clear();
+    }
 }
 
 [System.Serializable]
@@ -74,6 +93,15 @@ Coût en ressources(en faisant correspondre l’Int avec l’Id de ressource)*/
         name = _name;
         description = _desc;
     }
+
+    public enum ComponentType
+    {
+        Frame,
+        Weapon,
+        Arm,
+        Leg,
+        Reactor
+    }
 }
 
 public enum Tags
@@ -94,11 +122,4 @@ public enum Tags
     Self
 }
 
-public enum ComponentType
-{
-    Frame,
-    Weapon,
-    Arm,
-    Leg,
-    Reactor
-}
+

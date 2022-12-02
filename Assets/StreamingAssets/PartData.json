@@ -1,0 +1,40 @@
+{"parts":
+[
+	{"type":0,
+	"id":2,
+	"energyCost":0,
+	"stats":[100,20,10,20],
+	"resourceCost":[
+		{"resourceId":0,"qty":10},
+		{"resourceId":2,"qty":20}],
+	"name":"TestFrame",
+	"description":"My very first frame"},
+	{"type":0,
+	"id":2,
+	"energyCost":0,
+	"stats":[150,20,10,20],
+	"resourceCost":[
+		{"resourceId":0,"qty":15},
+		{"resourceId":1,"qty":20}],
+	"name":"TestFrame2",
+	"description":"My very second frame"},
+	{"type":0,
+	"id":2,
+	"energyCost":0,
+	"stats":[150,20,10,20],
+	"resourceCost":[
+		{"resourceId":0,"qty":15},
+		{"resourceId":1,"qty":20}],
+	"name":"TestFrame3",
+	"description":"My third frame"},
+	{"type":0,
+	"id":2,
+	"energyCost":0,
+	"stats":[150,20,10,20],
+	"resourceCost":[
+		{"resourceId":0,"qty":15},
+		{"resourceId":1,"qty":20}],
+	"name":"TestFrame4",
+	"description":"My fourth frame"}
+]
+}
