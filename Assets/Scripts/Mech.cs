@@ -15,13 +15,13 @@ Puissance réacteur : Nombre de pts de structure max du mech
 Tags : Liste des Tags récupérés par chaque partie du mech*/
 
 
-    public int hp, defense, agility, speed, atkPower, mechPower;
-    public List<Tags> mechTags;
+    public int hp, defense, agility, speed, atkPower, mechPower, crew, modSlot;
+    public List<Part.Tags> mechTags;
     public List<Part> mechComponents;
     public string name;
     public string description;
 
-    public Mech(string _name, string _description, int _hp, int _def, int _agi, int _spd, int _atkPow, int _mechPow, List<Tags> _mTags, List<Part> _mComp)
+    public Mech(string _name, string _description, int _hp, int _def, int _agi, int _spd, int _atkPow, int _mechPow, List<Part.Tags> _mTags, List<Part> _mComp)
     {
         name = _name;
         description = _description;
@@ -31,9 +31,32 @@ Tags : Liste des Tags récupérés par chaque partie du mech*/
         speed = _spd;
         atkPower = 0;
         mechPower = 0;
+        modSlot = 0;
 
-        mechTags = new List<Tags>();
+        mechTags = new List<Part.Tags>();
         
+        mechComponents = new List<Part>();
+        foreach (Part t in _mComp)
+        {
+            mechComponents.Add(t);
+        }
+        _mComp.Clear();
+    }
+
+    public Mech(string _name, string _desc, List<Part> _mComp)
+    {
+        name = _name;
+        description = _desc;
+
+        hp = 0;
+        defense = 0;
+        agility = 0;
+        speed = 0;
+        atkPower = 0;
+        mechPower = 0;
+        crew = 0;
+        modSlot = 0;
+
         mechComponents = new List<Part>();
         foreach (Part t in _mComp)
         {
@@ -56,9 +79,11 @@ Coût en ressources(en faisant correspondre l’Int avec l’Id de ressource)*/
 
     public ComponentType type;
     public int id, energyCost;
+    public int hp, defense, agility, speed, atkPower, crew, modSlot;
     public int[] stats;
     public List<Resource> resourceCost;
     public string name, description;
+    public List<Tags> tags;
 
     [System.Serializable]
     public struct Resource
@@ -73,7 +98,9 @@ Coût en ressources(en faisant correspondre l’Int avec l’Id de ressource)*/
         }
     }
 
-    public Part(ComponentType _t, int _id, int _energy, int[] _stats, List<Resource> _resources, string _name, string _desc)
+    
+
+    /*public Part(ComponentType _t, int _id, int _energy, int[] _stats, List<Resource> _resources, string _name, string _desc)
     {
         type = _t;
         id = _id;
@@ -92,7 +119,7 @@ Coût en ressources(en faisant correspondre l’Int avec l’Id de ressource)*/
         _resources.Clear();
         name = _name;
         description = _desc;
-    }
+    }*/
 
     public enum ComponentType
     {
@@ -102,24 +129,26 @@ Coût en ressources(en faisant correspondre l’Int avec l’Id de ressource)*/
         Leg,
         Reactor
     }
+
+    public enum Tags
+    {
+        Kinetic,
+        Thermal,
+        Sharp,
+        CloseCombat,
+        NonLethal,
+        AoE,
+        Heal,
+        Drill,
+        Grab,
+        LongRange,
+        IgnoreDef,
+        DCA,
+        Fly,
+        Self
+    }
 }
 
-public enum Tags
-{
-    Kinetic,
-    Thermal,
-    Sharp,
-    CloseCombat,
-    NonLethal,
-    AoE,
-    Heal,
-    Drill,
-    Grab,
-    LongRange,
-    IgnoreDef,
-    DCA,
-    Fly,
-    Self
-}
+
 
 

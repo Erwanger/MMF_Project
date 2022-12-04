@@ -41,6 +41,11 @@ public class Menu_UI_Controller : MonoBehaviour
         panelLogin_GO.SetActive(!loggedIn);
     }
 
+    public void OnClick_LoginAdmin()
+    {
+        playfabManager.Login("test@test.com", "testadmin");
+    }
+
     public void OnClick_Login()
     {
         playfabManager.Login(emailInput.text, passwordInput.text);

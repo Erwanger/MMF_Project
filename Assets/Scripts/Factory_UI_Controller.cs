@@ -7,12 +7,35 @@ using TMPro;
 
 public class Factory_UI_Controller : MonoBehaviour
 {
-    [SerializeField] Factory_Controller factoControl;
+    Factory_Controller factoControl;
     [SerializeField] GameObject[] UI_GameObject;
     [SerializeField] GameObject UI_Storage_Resources;
 
     [SerializeField] TMP_Dropdown mechListDropdown;
     [SerializeField] TMP_Dropdown partListDropdown;
+
+    [SerializeField] GameObject partStatsDisplay;
+    public bool partStatsDisplayUpdated = false;
+
+    public void ChangeStatsDisplayUpdated(bool t)
+    {
+        partStatsDisplayUpdated = t;
+    }
+
+    public void OnDropdownItemHighlighted(GameObject dropdownItem)
+    {
+        string partName = dropdownItem.GetComponent<TMP_Text>().text;
+        Part p = DataCenter.dataSingleton.myPartsList.GetPartByName(partName);
+        partStatsDisplay.transform.Find("PartStatsSection").Find("NameTxt").GetComponent<TMP_Text>().text = p.name;
+        partStatsDisplay.transform.Find("PartStatsSection").Find("DescTxt").GetComponent<TMP_Text>().text = p.description;
+        partStatsDisplay.transform.Find("PartStatsSection").Find("Stats").Find("Stat1Txt").GetComponent<TMP_Text>().text = "" + p.hp;
+        partStatsDisplay.transform.Find("PartStatsSection").Find("Stats").Find("Stat2Txt").GetComponent<TMP_Text>().text = "" + p.atkPower;
+        partStatsDisplay.transform.Find("PartStatsSection").Find("Stats").Find("Stat3Txt").GetComponent<TMP_Text>().text = "" + p.defense;
+        partStatsDisplay.transform.Find("PartStatsSection").Find("Stats").Find("Stat4Txt").GetComponent<TMP_Text>().text = "" + p.agility;
+        partStatsDisplay.transform.Find("PartStatsSection").Find("Stats").Find("Stat5Txt").GetComponent<TMP_Text>().text = "" + p.speed;
+        partStatsDisplay.transform.Find("PartStatsSection").Find("Stats").Find("Stat6Txt").GetComponent<TMP_Text>().text = "" + p.crew;
+        partStatsDisplay.transform.Find("PartStatsSection").Find("Stats").Find("Stat7Txt").GetComponent<TMP_Text>().text = "" + p.modSlot;
+    }
 
     /*
      0 Frame
@@ -75,6 +98,20 @@ public class Factory_UI_Controller : MonoBehaviour
         {
             Imgs_Storage[i].fillAmount = factoControl.storage[i] / factoControl.storageMax[i];
             Txt_Storage[i].text = "" + (int)factoControl.storage[i];
+        }
+
+
+        if(partStatsDisplay.activeSelf && !partStatsDisplayUpdated)
+        {
+            //Debug.Log("PartStatsDisplay opened");
+
+            partStatsDisplayUpdated = true;
+        }
+
+        if (!partStatsDisplay.activeSelf && partStatsDisplayUpdated)
+        {
+            //Debug.Log("PartStatsDisplay closed");
+            partStatsDisplayUpdated = false;
         }
     }
 
