@@ -11,6 +11,8 @@ public class AssetBundlesManager : MonoBehaviour
 
     IEnumerator GetAssetBundle()
     {
+
+        //la ligne ci-dessous nécessite un lien de DL DIRECT
         UnityWebRequest www = UnityWebRequestAssetBundle.GetAssetBundle("https://drive.google.com/drive/folders/1lnFsbg19ywn4nzVsnLgtkE2w4nWayAVj?usp=share_link/");
         yield return www.SendWebRequest();
 

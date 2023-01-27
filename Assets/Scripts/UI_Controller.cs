@@ -7,7 +7,14 @@ public class UI_Controller : MonoBehaviour
 {
     void OpenActionPanel(bool isLgAction)
     {
-
+        if(isLgAction)
+        {
+            //Faire dégats puis terminer tour
+        }
+        else
+        {
+            //Faire degats, griser Boutn Longue Action
+        }
     }
 
     public void OnLgActionButton_Clicked()
