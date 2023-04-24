@@ -78,7 +78,15 @@ public class Factory_UI_Controller : MonoBehaviour
         }
 
         partListDropdown.AddOptions(partNames);
+        partNames.Clear();
 
+        foreach(Mech m in DataCenter.dataSingleton.mechList.mechs)
+        {
+            partNames.Add(m.name);
+
+        }
+
+        mechListDropdown.AddOptions(partNames);
         partNames.Clear();
 
         componentDropdowns[0].AddOptions(DataCenter.dataSingleton.myPartsList.GetPartsNamesByComponentType(Part.ComponentType.Frame));

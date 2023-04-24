@@ -55,10 +55,15 @@ public class DataCenter : MonoBehaviour
         }
     }
 
+    public class MechList
+    {
+        public List<Mech> mechs;
+    }
+
     public PartsList myPartsList = new PartsList();
     public PartsList testPartsList = new PartsList();
 
-    public Mech[] mechs;
+    public MechList mechList = new MechList();
 
     // Start is called before the first frame update
     void Start()
@@ -75,6 +80,7 @@ public class DataCenter : MonoBehaviour
 
 
         myPartsList = JsonUtility.FromJson<PartsList>(System.IO.File.ReadAllText(Application.streamingAssetsPath + "/PartData.json"));
+        mechList = JsonUtility.FromJson<MechList>(System.IO.File.ReadAllText(Application.streamingAssetsPath + "/MechList.json"));
         //Debug.Log(Application.persistentDataPath);
     }    
 }
