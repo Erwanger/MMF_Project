@@ -17,7 +17,7 @@ Tags : Liste des Tags récupérés par chaque partie du mech*/
 
     public int hp, defense, agility, speed, atkPower, mechPower, crew, modSlot;
     public List<Part.Tags> mechTags;
-    public List<Part> mechComponents;
+    public List<int> mechComponents;
     public string name;
     public string description;
 
@@ -35,10 +35,10 @@ Tags : Liste des Tags récupérés par chaque partie du mech*/
 
         mechTags = new List<Part.Tags>();
         
-        mechComponents = new List<Part>();
+        mechComponents = new List<int>();
         foreach (Part t in _mComp)
         {
-            mechComponents.Add(t);
+            mechComponents.Add(t.id);
         }
         _mComp.Clear();
     }
@@ -57,12 +57,14 @@ Tags : Liste des Tags récupérés par chaque partie du mech*/
         crew = 0;
         modSlot = 0;
 
-        mechComponents = new List<Part>();
+        mechComponents = new List<int>();
         foreach (Part t in _mComp)
         {
-            mechComponents.Add(t);
+            mechComponents.Add(t.id);
         }
         _mComp.Clear();
+
+        mechTags = new List<Part.Tags>();
     }
 }
 
