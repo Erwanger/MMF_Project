@@ -80,7 +80,7 @@ public class Factory_UI_Controller : MonoBehaviour
         partListDropdown.AddOptions(partNames);
         partNames.Clear();
 
-        foreach(Mech m in DataCenter.dataSingleton.mechList)
+        foreach(Mech m in DataCenter.dataSingleton.mechList.mechs)
         {
             partNames.Add(m.name);
         }
@@ -95,6 +95,9 @@ public class Factory_UI_Controller : MonoBehaviour
         componentDropdowns[4].AddOptions(DataCenter.dataSingleton.myPartsList.GetPartsNamesByComponentType(Part.ComponentType.Weapon));
         componentDropdowns[5].AddOptions(DataCenter.dataSingleton.myPartsList.GetPartsNamesByComponentType(Part.ComponentType.Reactor));
         componentDropdowns[6].AddOptions(DataCenter.dataSingleton.myPartsList.GetPartsNamesByComponentType(Part.ComponentType.Leg));
+
+        mechListDropdown.ClearOptions();
+        mechListDropdown.AddOptions(DataCenter.dataSingleton.mechList.GetMechsNames());
     }
 
 
@@ -135,6 +138,7 @@ public class Factory_UI_Controller : MonoBehaviour
         for(int i = 0; i<componentDropdowns.Length; i++)
         {
             parts.Add(DataCenter.dataSingleton.myPartsList.GetPartById(componentDropdowns[i].value));
+            Debug.Log(componentDropdowns[i].value);
         }
 
         Mech m = new Mech("Test", "Description of Test", parts);

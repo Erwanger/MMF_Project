@@ -55,15 +55,28 @@ public class DataCenter : MonoBehaviour
         }
     }
 
+    [System.Serializable]
     public class MechList
     {
         public List<Mech> mechs;
+
+        public List<string> GetMechsNames()
+        {
+            List<string> result = new List<string>();
+
+            foreach (Mech m in mechs)
+            {
+                result.Add(m.name);
+            }
+
+            return result;
+        }
     }
 
     public PartsList myPartsList = new PartsList();
     //public PartsList testPartsList = new PartsList();
 
-    public List<Mech> mechList = new List<Mech>();
+    public MechList mechList = new MechList();
 
     // Start is called before the first frame update
     void Start()
@@ -81,8 +94,11 @@ public class DataCenter : MonoBehaviour
         //Load parts from the file PartData.json
         myPartsList = JsonUtility.FromJson<PartsList>(System.IO.File.ReadAllText(Application.streamingAssetsPath + "/PartData.json"));
         //Load mechs from the file MechList.json
-        //mechList = JsonUtility.FromJson<MechList>(System.IO.File.ReadAllText(Application.persistentDataPath + "/MechList.json"));
+        mechList = JsonUtility.FromJson<MechList>(System.IO.File.ReadAllText(Application.persistentDataPath + "/MechList.json"));
         Debug.Log(Application.persistentDataPath);
+
+        Debug.Log(mechList.mechs.Count);
+        Debug.Log(myPartsList.parts.Count);
     }    
 
     public void Save()
@@ -92,8 +108,9 @@ public class DataCenter : MonoBehaviour
 
     public void AddMechToList(Mech m)
     {
-        mechList.Add(m);
+        mechList.mechs.Add(m);
         Debug.Log(mechList.ToString());
+        Debug.Log(mechList.mechs.Count);
     }
 }
 
