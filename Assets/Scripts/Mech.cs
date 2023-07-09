@@ -15,7 +15,7 @@ Puissance réacteur : Nombre de pts de structure max du mech
 Tags : Liste des Tags récupérés par chaque partie du mech*/
 
 
-    public int hp, defense, agility, speed, atkPower, mechPower, crew, modSlot;
+    public int hp, defense, agility, speed, atkPower, mechPower, crew, modSlot, id;
     public List<Part.Tags> mechTags;
     public List<int> mechComponents;
     public string name;
@@ -23,6 +23,7 @@ Tags : Liste des Tags récupérés par chaque partie du mech*/
 
     public Mech(string _name, string _description, int _hp, int _def, int _agi, int _spd, int _atkPow, int _mechPow, List<Part.Tags> _mTags, List<Part> _mComp)
     {
+        id = 0;
         name = _name;
         description = _description;
         hp = _hp;
@@ -43,8 +44,9 @@ Tags : Liste des Tags récupérés par chaque partie du mech*/
         _mComp.Clear();
     }
 
-    public Mech(string _name, string _desc, List<Part> _mComp)
+    public Mech(string _name, string _desc, List<Part> _mComp, int _id)
     {
+        id = _id;
         name = _name;
         description = _desc;
 

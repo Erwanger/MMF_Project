@@ -17,6 +17,9 @@ public class Factory_UI_Controller : MonoBehaviour
     [SerializeField] GameObject partStatsDisplay;
     public bool partStatsDisplayUpdated = false;
 
+    //Identifier of the current displayed mech
+    int currMechId = 0;
+
     public void ChangeStatsDisplayUpdated(bool t)
     {
         partStatsDisplayUpdated = t;
@@ -36,6 +39,8 @@ public class Factory_UI_Controller : MonoBehaviour
         partStatsDisplay.transform.Find("PartStatsSection").Find("Stats").Find("Stat6Txt").GetComponent<TMP_Text>().text = "" + p.crew;
         partStatsDisplay.transform.Find("PartStatsSection").Find("Stats").Find("Stat7Txt").GetComponent<TMP_Text>().text = "" + p.modSlot;
     }
+
+    
 
     /*
      0 Frame
@@ -77,16 +82,17 @@ public class Factory_UI_Controller : MonoBehaviour
             partNames.Add(part.name);
         }
 
+        partListDropdown.ClearOptions();
         partListDropdown.AddOptions(partNames);
         partNames.Clear();
 
-        foreach(Mech m in DataCenter.dataSingleton.mechList.mechs)
+        /*foreach(Mech m in DataCenter.dataSingleton.mechList.mechs)
         {
             partNames.Add(m.name);
         }
 
         mechListDropdown.AddOptions(partNames);
-        partNames.Clear();
+        partNames.Clear();*/
 
         componentDropdowns[0].AddOptions(DataCenter.dataSingleton.myPartsList.GetPartsNamesByComponentType(Part.ComponentType.Frame));
         componentDropdowns[1].AddOptions(DataCenter.dataSingleton.myPartsList.GetPartsNamesByComponentType(Part.ComponentType.Arm));
@@ -110,7 +116,6 @@ public class Factory_UI_Controller : MonoBehaviour
             Txt_Storage[i].text = "" + (int)factoControl.storage[i];
         }
 
-
         if(partStatsDisplay.activeSelf && !partStatsDisplayUpdated)
         {
             //Debug.Log("PartStatsDisplay opened");
@@ -123,6 +128,8 @@ public class Factory_UI_Controller : MonoBehaviour
             //Debug.Log("PartStatsDisplay closed");
             partStatsDisplayUpdated = false;
         }
+
+
     }
 
 
@@ -138,12 +145,50 @@ public class Factory_UI_Controller : MonoBehaviour
         for(int i = 0; i<componentDropdowns.Length; i++)
         {
             parts.Add(DataCenter.dataSingleton.myPartsList.GetPartById(componentDropdowns[i].value));
-            Debug.Log(componentDropdowns[i].value);
+            //Debug.Log(componentDropdowns[i].value);
+        }
+        
+
+        Mech m = new Mech("Test", "Description of Test", parts, currMechId);
+
+        int mechIndex = DataCenter.dataSingleton.mechList.IsIdExisting(currMechId);
+
+        if (mechIndex != -1)
+        {
+            DataCenter.dataSingleton.mechList.mechs[mechIndex] = m;
+        }
+        else
+        {
+            DataCenter.dataSingleton.AddMechToList(m);
+        }
+        
+        DataCenter.dataSingleton.Save();
+
+        mechListDropdown.ClearOptions();
+        mechListDropdown.AddOptions(DataCenter.dataSingleton.mechList.GetMechsNames());
+    }
+
+    public void ModifyButton_Clicked()
+    {
+        //Charger le mech stocké en  mémoire à l'indice de mechListDropdown
+
+        for(int i=0; i<componentDropdowns.Length; i++)
+        {
+            componentDropdowns[i].value = DataCenter.dataSingleton.mechList.mechs[mechListDropdown.value].mechComponents[i];
         }
 
-        Mech m = new Mech("Test", "Description of Test", parts);
+        currMechId = DataCenter.dataSingleton.mechList.mechs[mechListDropdown.value].id;
+    }
 
-        DataCenter.dataSingleton.AddMechToList(m);
-        DataCenter.dataSingleton.Save();
+    public void CreateButton_Clicked()
+    {
+        //Créer nouveau mech
+        for (int i = 0; i < componentDropdowns.Length; i++)
+        {
+            componentDropdowns[i].value = 0;
+        }
+
+        //Generating id of current mech
+        currMechId = DataCenter.dataSingleton.mechList.FirstAvailableId();
     }
 }

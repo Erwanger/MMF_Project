@@ -66,10 +66,47 @@ public class DataCenter : MonoBehaviour
 
             foreach (Mech m in mechs)
             {
-                result.Add(m.name);
+                result.Add("#"+m.id+" : "+m.name);
             }
 
             return result;
+        }
+
+        public int IsIdExisting(int _id)
+        {
+            int i = -1;
+
+            foreach(Mech m in mechs)
+            {
+                i++;
+
+                if (m.id == _id)
+                    return i;
+            }
+
+            return -1;
+        }
+
+        public int FirstAvailableId()
+        {
+            int i = 0;
+            bool found = false;
+
+            do
+            {
+
+                if (IsIdExisting(i) == -1)
+                {
+                    found = true;
+                }
+                else
+                {
+                    i++;
+                }
+
+            } while (!found);
+
+            return i;
         }
     }
 
