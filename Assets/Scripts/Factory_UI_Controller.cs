@@ -17,6 +17,8 @@ public class Factory_UI_Controller : MonoBehaviour
     [SerializeField] GameObject partStatsDisplay;
     public bool partStatsDisplayUpdated = false;
 
+    [SerializeField] GameObject mechStatsList;
+
     //Identifier of the current displayed mech
     int currMechId = 0;
 
@@ -38,9 +40,7 @@ public class Factory_UI_Controller : MonoBehaviour
         partStatsDisplay.transform.Find("PartStatsSection").Find("Stats").Find("Stat5Txt").GetComponent<TMP_Text>().text = "" + p.speed;
         partStatsDisplay.transform.Find("PartStatsSection").Find("Stats").Find("Stat6Txt").GetComponent<TMP_Text>().text = "" + p.crew;
         partStatsDisplay.transform.Find("PartStatsSection").Find("Stats").Find("Stat7Txt").GetComponent<TMP_Text>().text = "" + p.modSlot;
-    }
-
-    
+    } 
 
     /*
      0 Frame
@@ -178,6 +178,7 @@ public class Factory_UI_Controller : MonoBehaviour
         }
 
         currMechId = DataCenter.dataSingleton.mechList.mechs[mechListDropdown.value].id;
+        UpdateMechStats();
     }
 
     public void CreateButton_Clicked()
@@ -190,5 +191,16 @@ public class Factory_UI_Controller : MonoBehaviour
 
         //Generating id of current mech
         currMechId = DataCenter.dataSingleton.mechList.FirstAvailableId();
+        //UpdateMechStats();
+    }
+
+    public void UpdateMechStats()
+    {
+        mechStatsList.transform.GetChild(1).GetChild(0).GetComponent<TMP_Text>().text = "" + DataCenter.dataSingleton.mechList.mechs[currMechId].hp;
+        mechStatsList.transform.GetChild(1).GetChild(2).GetComponent<TMP_Text>().text = "" + DataCenter.dataSingleton.mechList.mechs[currMechId].atkPower;
+        mechStatsList.transform.GetChild(1).GetChild(3).GetComponent<TMP_Text>().text = "" + DataCenter.dataSingleton.mechList.mechs[currMechId].defense;
+        mechStatsList.transform.GetChild(1).GetChild(1).GetComponent<TMP_Text>().text = "" + DataCenter.dataSingleton.mechList.mechs[currMechId].agility;
+        mechStatsList.transform.GetChild(1).GetChild(4).GetComponent<TMP_Text>().text = "" + DataCenter.dataSingleton.mechList.mechs[currMechId].speed;
+        mechStatsList.transform.GetChild(1).GetChild(5).GetComponent<TMP_Text>().text = "" + DataCenter.dataSingleton.mechList.mechs[currMechId].crew;
     }
 }

@@ -63,10 +63,33 @@ Tags : Liste des Tags récupérés par chaque partie du mech*/
         foreach (Part t in _mComp)
         {
             mechComponents.Add(t.id);
+            hp += t.hp;
+            defense += t.defense;
+            agility += t.agility;
+            speed += t.speed;
+            atkPower += t.atkPower;
+            //mechPower += t.mechPower;
+            crew += t.crew;
+            modSlot += t.modSlot;
         }
         _mComp.Clear();
 
         mechTags = new List<Part.Tags>();
+    }
+
+    public void CalculateStats()
+    {
+        foreach(int partId in mechComponents)
+        {
+            hp += DataCenter.dataSingleton.myPartsList.GetPartById(partId).hp;
+            defense += DataCenter.dataSingleton.myPartsList.GetPartById(partId).defense;
+            agility += DataCenter.dataSingleton.myPartsList.GetPartById(partId).agility;
+            speed += DataCenter.dataSingleton.myPartsList.GetPartById(partId).speed;
+            atkPower += DataCenter.dataSingleton.myPartsList.GetPartById(partId).atkPower;
+            //mechPower += DataCenter.dataSingleton.myPartsList.GetPartById(partId).mechPower;
+            crew += DataCenter.dataSingleton.myPartsList.GetPartById(partId).crew;
+            modSlot += DataCenter.dataSingleton.myPartsList.GetPartById(partId).modSlot;
+        }
     }
 }
 
@@ -84,7 +107,7 @@ Coût en ressources(en faisant correspondre l’Int avec l’Id de ressource)*/
     public ComponentType type;
     public int id, energyCost;
     public int hp, defense, agility, speed, atkPower, crew, modSlot;
-    public int[] stats;
+    //public int[] stats;
     public List<Resource> resourceCost;
     public string name, description;
     public List<Tags> tags;
