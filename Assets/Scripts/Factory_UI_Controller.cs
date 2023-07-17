@@ -20,7 +20,7 @@ public class Factory_UI_Controller : MonoBehaviour
     [SerializeField] GameObject mechStatsList;
 
     //Identifier of the current displayed mech
-    int currMechId = 0;
+    int currMechId = -1;
 
     public void ChangeStatsDisplayUpdated(bool t)
     {
@@ -56,6 +56,8 @@ public class Factory_UI_Controller : MonoBehaviour
     Image[] Imgs_Storage;
     public TextMeshProUGUI[] Txt_Storage;
     //Text[] Txt_StorageMax;
+
+    
 
     private void Start()
     {
@@ -116,20 +118,33 @@ public class Factory_UI_Controller : MonoBehaviour
             Txt_Storage[i].text = "" + (int)factoControl.storage[i];
         }
 
+        //Affichage de la fenètre des stats pour la part entrain d'être survolée
         if(partStatsDisplay.activeSelf && !partStatsDisplayUpdated)
         {
-            //Debug.Log("PartStatsDisplay opened");
-
             partStatsDisplayUpdated = true;
         }
 
         if (!partStatsDisplay.activeSelf && partStatsDisplayUpdated)
         {
-            //Debug.Log("PartStatsDisplay closed");
             partStatsDisplayUpdated = false;
         }
 
 
+        //Rendre utilisable les dropdowns de parts uniquement si un ID valide est sélectionné
+        if(DataCenter.dataSingleton.mechList.IsIdExisting(currMechId) != -1 )
+        {
+            for(int i = 0; i< componentDropdowns.Length; i++)
+            {
+                componentDropdowns[i].interactable = true;
+            }
+        }
+        else
+        {
+            for (int i = 0; i < componentDropdowns.Length; i++)
+            {
+                componentDropdowns[i].interactable = false;
+            }
+        }
     }
 
 
@@ -166,6 +181,8 @@ public class Factory_UI_Controller : MonoBehaviour
 
         mechListDropdown.ClearOptions();
         mechListDropdown.AddOptions(DataCenter.dataSingleton.mechList.GetMechsNames());
+
+        parts.Clear();
     }
 
     public void ModifyButton_Clicked()
@@ -192,6 +209,8 @@ public class Factory_UI_Controller : MonoBehaviour
         //Generating id of current mech
         currMechId = DataCenter.dataSingleton.mechList.FirstAvailableId();
         //UpdateMechStats();
+
+        
     }
 
     public void UpdateMechStats()
